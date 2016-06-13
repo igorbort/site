@@ -1,27 +1,33 @@
 body {
-	background-image: url(https://niluka2a.files.wordpress.com/2013/04/drupal.jpg);
+
+	background-image: url(http://i.vimeocdn.com/video/473245098_1280x720.jpg);
+	padding: 15px;
+	margin: 15px;
+	background-size: 1280px 720px;
+    background-repeat: no-repeat;
+
 }
 #IN2 {
 	color: #FFFFFF;
 	
 }
 #IN {
-	transform: rotate(0deg) scale(0.5);
-	transition: 5s all;
+	
 	background-color: #fff; 
 	color: #333;
-	padding: 15px;
-	margin: 15px;
-	border: 7px solid #004D7B; 
-	border-radius: 100px;
+	padding: 20px;
+	margin: 20px;
+	border: 10px solid #004D7B; 
+	border-radius: 50px;
 	opacity: 0.9;
 	box-shadow: 10px 10px 10px #3AE2CE;
-	height: 50px;
+	height: 10px;
+	width: 75px;
 	display: block;
 	text-align: center;
 	text-overflow: hidden;
-	font-size: 30px;
-	font-weight: 900;
+	font-size: 15px;
+	font-weight: 90;
 	text-decoration: blink;
 }
 #IN:hover {

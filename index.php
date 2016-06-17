@@ -1,62 +1,111 @@
+<?
+# Connect to the Database:
+try {
+  $host = 'localhost'; // Host name
+  $name = 'pdo'; // Database name
+  $user = 'pdo'; // Username
+  $pass = 'thepassword'; // Password
+  $dbc = new PDO("mysql:host=$host;dbname=$name", $user, $pass);
+}
+catch(PDOException $e) {
+    echo $e->getMessage();
+}
+
+# Add new database record:
+if(isset($_POST['add'])){
+  
+  # Prepare statement with named placeholders:
+  $stmt = $dbc->prepare("INSERT INTO users ( first,last,website ) VALUES ( :first, :last, :website )");
+    
+  # Assign values to named placeholders  
+  $stmt->bindParam(':first', $_POST['first']);
+  $stmt->bindParam(':last', $_POST['last']);
+  $stmt->bindParam(':website', $_POST['website']);
+  
+  $stmt->execute();
+
+}
+
+# Save a database record:
+if(isset($_POST['save'])){
+  
+  # Prepare statement with unnamed placeholders:
+  $stmt = $dbc->prepare("UPDATE users SET first = ?, last = ?, website = ? WHERE id = ?");
+    
+  # Assign values to unnamed placeholders  
+  $stmt->bindParam(1, $_POST['first']);
+  $stmt->bindParam(2, $_POST['last']);
+  $stmt->bindParam(3, $_POST['website']);
+  $stmt->bindParam(4, $_POST['id']);
+  
+  $stmt->execute();
+
+}
+?>
+
 <!DOCTYPE html>
-<html> 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
-		<title>Моя PHP сторінка GITt</title>
-		<link href="style2.css" rel="stylesheet" type="text/css"/>
-	</head>
+<html>
+  <head>
+  
+    <title>PDO</title>  
 
-	<body>
-	<a href="http://drupal.org" id="IN">Переход на drupal.org</a>
-		<p>asijdhsakjdh johdjashdjlk ashd</p>>
-		<?php
-			echo "<font color=#4CB848>";
-			$name[0] = "Кофе \"Торальдо\"";
-			$name[1] = "Кофе \"Торальдо Блу\"";
-			$name[2] = "Кофе \"Торальдо Вендинг\"";
-			$koli4estvo = "1 кг";
-			$price[0] = "300 грн";
-			$price[1] = "350 грн";
-			$price[2] = "400 грн";
-			$kolvjashike = "6";
-		echo "<p align='left'>";
-			function mylink($mylink,$name)
-			{
-		echo "<a href='$mylink' id='IN2'>Кофе \"Торальдо\"</a>";
-			} 
-			mylink('http://caffetoraldo.it','$name|0|');
+  </head>
+  <body>
+    <div class="container-fluid">
+      
+      <header class="row">
+        <h1>PDO with MySQL</h1>
+      </header>    
 
-		echo "<br> \"Торальдо\" - $koli4estvo, по цене - $price[0]";
-			$cenajashik = $price[0] * $koli4estvo * $kolvjashike;
-		echo "<br>Цена за 1ящ.(6шт.) -$cenajashik грн";
-			$sto100 = $cenajashik * "100" - $cenajashik;
-		echo "<br>Цена за 100ящ. -$sto100 грн";
-			
-		echo "<p align='left'>";
-		function mylink2($mylink2,$name)
-			{
-		echo "<a href='$mylink2' id='IN3'>Кофе \"Торальдо Вендинг\"</a>";
-			} 
-			mylink2('http://caffetoraldo.it','$name|3|');
-		echo "<br> \"Торальдо Блу\" - $koli4estvo, по цене - $price[1]";
-			$cenajashik = $price[1] * $koli4estvo * $kolvjashike;
-		echo "<br>Цена за 1ящ.(6шт.) -$cenajashik грн";
-			$sto100 = $cenajashik * "100" - $cenajashik;
-		echo "<br>Цена за 100ящ. -$sto100 грн";
+      <div>
+        <form method="post">
+            <input name="first" placeholder="First Name">
+            <input name="last" placeholder="Last Name">
+            <input name="website" placeholder="Website Address">
+            <button name="add" type="submit">Add</button>
+          </div>        
+        </form>
+      </div>   
+    
+      <hr>
+      
+      <table>
+        
+        <thead>
+          
+          <tr>
+            <th>ID</th>
+            <th>First</th>
+            <th>Last</th>
+            <th>Website</th>
+            <th>Save</th>          
+          </tr>
+          
+        </thead>
+        
+        <tbody>
+          
+          <?
+          # Pull all database records:
+          $stmt = $dbc->query('SELECT * FROM users');
+          $stmt->setFetchMode(PDO::FETCH_ASSOC); // Set mode to associative array
+          
+          while($data= $stmt->fetch()){?>
+            <form method="post">
+              <tr>
+                <td><input name="id" value="<?=$data['id']?>" readonly></td>
+                <td><input name="first" value="<?=$data['first']?>"></td>
+                <td><input name="last" value="<?=$data['last']?>"></td>
+                <td><input name="website" value="<?=$data['website']?>"></td>
+                <td><button name="save" type="submit">Save</button></td>
+              </tr>
+            </form>
+          <?}?>             
+          
+        </tbody>   
+    
+    </div>
 
-		echo "<p align='left'>";
-		function mylink3($mylink3,$name)
-			{
-		echo "<a href='$mylink3' id='IN3'>Кофе \"Торальдо Блу\"</a>";
-			} 
-			mylink3('http://caffetoraldo.it','$name|2|');
-		echo "<br> \"Торальдо Блу\" - $koli4estvo, по цене - $price[2]";
-			$cenajashik = $price[2] * $koli4estvo * $kolvjashike;
-		echo "<br>Цена за 1ящ.(6шт.) -$cenajashik грн";
-			$sto100 = $cenajashik * "100" - $cenajashik;
-		echo "<br>Цена за 100ящ. -$sto100 грн";
-		?>
-
-
-	</body>
-</html>
+  </body>
+  
+</html>    

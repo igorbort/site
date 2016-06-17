@@ -8,7 +8,9 @@
 
 	<body>
 	<a href="http://drupal.org" id="IN">Переход на drupal.org</a>
-		<p>asijdhsakjdh johdjashdjlk ashd</p>>
+		<p>asijdhsakjragg
+		rgagrrgdrgsrg
+		rgdrgrgrgrgrgrgdh johdjashdjlk ashd</p>>
 		<?php
 			echo "<font color=#4CB848>";
 			$name[0] = "Кофе \"Торальдо\"";

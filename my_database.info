@@ -1,0 +1,5 @@
+; &Id:$
+name = My database
+description = Module for example of use Database API in Drupal.
+version = 7.x-1.x-dev
+core = 7.x

@@ -1,0 +1,42 @@
+body {
+
+	background-image: url(http://i.vimeocdn.com/video/473245098_1280x720.jpg);
+	padding: 15px;
+	margin: 15px;
+	background-size: 1280px 720px;
+    background-repeat: no-repeat;
+
+}
+#IN2 {
+	color: #FFFFFF;
+	
+}
+#IN {
+	
+	background-color: #fff; 
+	color: #333;
+	padding: 20px;
+	margin: 20px;
+	border: 10px solid #004D7B; 
+	border-radius: 50px;
+	opacity: 0.9;
+	box-shadow: 10px 10px 10px #3AE2CE;
+	height: 10px;
+	width: 75px;
+	display: block;
+	text-align: center;
+	text-overflow: hidden;
+	font-size: 15px;
+	font-weight: 90;
+	text-decoration: blink;
+}
+#IN:hover {
+	transform: rotate(360deg) scale(0.7);
+	background-color: #357EC2;
+}
+#IN3 {
+	color: #FFFFFF;
+}
+#IN4 {
+	color: #FFFFFF;
+}

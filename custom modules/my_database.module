@@ -177,7 +177,7 @@ function my_database_delete_form_submit($form, &$form_state) {
  */
 function my_database_update_title($id) {
   $placeholders = array(':id' => $id);
-  $namber = db_query("SELECT 'number' FROM {custom_table} WHERE 'id' = :id", $placeholders)->fetchField();
+  $number = db_query("SELECT 'number' FROM {custom_table} WHERE 'id' = :id", $placeholders)->fetchField();
   if ($number) {
     return t('Edit item with number "@num"', array('@num' => $number));
   }
